@@ -1,0 +1,147 @@
+doctype html
+html(lang="en", ng-app="doellie")
+	head
+		title= count
+
+		script(src="/modules/modernizr/modernizr.js")
+		script(src="/modules/es5-shim/es5-shim.js")
+		script(src="/modules/jquery/jquery.js")
+		script(src="/modules/angular/angular.js")
+		script(src="/modules/angular-route/angular-route.js")
+		script(src="/modules/angular-cookies/angular-cookies.js")
+
+		script(src="/modules/doellie/doellie-module.js")
+
+		link(href="/modules/lekker/lekker.css" rel="stylesheet")
+	body.always-show-scrollbar-y
+		nav.bg-warning
+			.container
+				div.overflow-hidden
+					ul.set.set-flex.set-md.flex-center
+						li.flex-slim
+							a.block.padding-lg.bg-primary-interactive(href="#") Primary
+						li.flex-slim
+							a.block.padding-lg.bg-success-interactive(href="#") Success
+						li.flex-slim
+							a.block.padding-lg.bg-info-interactive(href="#") Info
+						li.flex-slim
+							a.block.padding-lg.bg-warning-interactive(href="#") Warning
+						li.flex-slim
+							a.block.padding-lg.bg-danger-interactive(href="#") Danger
+						li.flex-fat
+							h1.block.no-margin.text-right Awesome Brand
+
+		main(ng-controller="MainController")
+			header.bg-primary.overflow-hidden
+				.container
+					h1 Welcome to my humble Homepage
+			section
+				header.bg-danger.overflow-hidden
+					.container
+						h1 Demonstration
+				article(ng-controller="HideController")
+					header.bg-info-interactive.overflow-hidden(ng-click="toggle()")
+						.container
+							h1 Sets
+					.margin-md(ng-if="!hidden")
+						mixin demo-items(n)
+							- var columns = [4, 2, 6, 3, 3, 6];
+							for col in columns.slice(0, n)
+								li(class='col-' + col)
+									div.padding-md.bg-success-interactive .col-#{col}
+
+						mixin demo-set(name, typeClass, numItems)
+							div.border-radius-md.padding-md.bg-info-soft
+								h2= name
+								div.overflow-hidden
+									ul.set(class=typeClass)
+										+demo-items(numItems)
+								h3 &amp;.set-xs
+								div.overflow-hidden
+									ul.set.set-xs(class=typeClass)
+										+demo-items(numItems)
+								h3 &amp;.set-sm
+								div.overflow-hidden
+									ul.set.set-sm(class=typeClass)
+										+demo-items(numItems)
+								h3 &amp;.set-md
+								div.overflow-hidden
+									ul.set.set-md(class=typeClass)
+										+demo-items(numItems)
+								h3 &amp;.set-lg
+								div.overflow-hidden
+									ul.set.set-lg(class=typeClass)
+										+demo-items(numItems)
+
+						ul.set.set-inline.set-md
+							li.col-4
+								+demo-set('.set.set-float', 'set-float', 6)
+							li.col-4
+								+demo-set('.set.set-inline', 'set-inline', 6)
+							li.col-4
+								+demo-set('.set.set-flex', 'set-flex', 6)
+							li.col-4
+								+demo-set('.set', '', 3)
+
+				article(ng-controller="HideController")
+					header.bg-info-interactive.overflow-hidden(ng-click="toggle()")
+						.container
+							h1 Colors!
+					.margin-md(ng-if="!hidden")
+						mixin demo-items(mod)
+							ul.set.set-inline.set-md
+								each type in ['primary', 'success', 'info', 'warning', 'danger']
+									li.col-6
+										div.padding-md(class='bg-' + type + (mod ? '-' + mod : '')) .bg-#{type + (mod ? '-' + mod : '')}
+						ul.set.set-inline.set-md
+							li.col-4
+								h2 bg
+								+demo-items()
+
+							li.col-4
+								h2 bg interactive
+								+demo-items('interactive')
+
+							li.col-4
+								h2 bg soft
+								+demo-items('soft')
+
+							li.col-4
+								h2 text
+								each type in ['primary', 'success', 'info', 'warning', 'danger']
+									h3.no-margin(class='text-' + type) .text-#{type}
+
+							li.col-4
+								h2 text interactive
+								each type in ['primary', 'success', 'info', 'warning', 'danger']
+									h3.no-margin(class='text-' + type + '-interactive') .text-#{type}-interactive
+
+							li.col-4
+								h2 text soft
+								each type in ['primary', 'success', 'info', 'warning', 'danger']
+									h3.no-margin(class='text-' + type + '-soft') .text-#{type}-soft
+
+
+				article(ng-controller="HideController")
+					header.bg-info-interactive.overflow-hidden(ng-click="toggle()")
+						.container
+							h1 Combine everything!
+					.margin-md(ng-if="!hidden")
+						a.block.padding-md.bg-warning-interactive
+							ul.set.set-flex.set-md.flex-center
+								- for (var i = 0; i < 3; i++) {
+									li.flex-slim
+										span.inline.inline-middle.bg-danger-interactive(style="width: 4px; height: 4px")
+								- }
+								li.flex-fat
+									h1.margin-sm.bg-danger.border-radius-lg.text-center Title
+								li.flex-fat
+									h1.margin-sm.bg-success.border-radius-lg.text-center Hardcore
+								li.flex-slim(style="font-size: 70%")
+									span.padding-xs.bg-info-soft INFO
+									| &nbsp;
+									span.padding-xs.bg-info-soft INFO2
+									| &nbsp;
+									span.padding-xs.bg-warning-soft WARNING
+			footer.padding-lg
+				p.text-right.text-primary-soft Copyright of no one

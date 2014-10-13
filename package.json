@@ -1,0 +1,23 @@
+{
+  "name": "lekker",
+  "version": "0.0.0",
+  "description": "lekker constructive html styling",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mickvangelderen/lekker.git"
+  },
+  "keywords": [
+    "css",
+    "lekker"
+  ],
+  "author": "Mick van Gelderen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mickvangelderen/lekker/issues"
+  },
+  "homepage": "https://github.com/mickvangelderen/lekker"
+}

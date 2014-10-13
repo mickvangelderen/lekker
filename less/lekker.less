@@ -1,0 +1,42 @@
+/* normalize */
+@import "burrowed/normalize";
+
+/* variables */
+@import "variables";
+
+/* mixins */
+@import "burrowed/border-radius";
+@import "burrowed/clearfix";
+@import "burrowed/size";
+
+/* positioning components */
+@import "container";
+@import "set";
+@import "flex";
+@import "inline";
+@import "block";
+@import "spacing";
+
+/* coloring components */
+@import "background";
+@import "text";
+@import "border-radius";
+
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+.overflow-hidden {
+	overflow: hidden;
+}
+
+.always-show-scrollbar-y {
+	overflow-y: scroll;
+}
+
+a {
+	text-decoration: none;
+	font-weight: bold;
+}
