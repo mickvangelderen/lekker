@@ -1,0 +1,49 @@
+@moods: primary success info warning danger;
+
+@color-primary: #428bca;
+@color-success: #5cb85c;
+@color-info:    #5bc0de;
+@color-warning: #f0ad4e;
+@color-danger:  #d9534f;
+
+// background-@{mood}: background color
+@background-primary: @color-primary;
+@background-success: @color-success;
+@background-info:    @color-info;
+@background-warning: @color-warning;
+@background-danger:  @color-danger;
+
+// background-hover-@{mood}: background color while being hovered
+@background-hover-primary: lighten(@background-primary, 5);
+@background-hover-success: lighten(@background-success, 5);
+@background-hover-info:    lighten(@background-info, 5);
+@background-hover-warning: lighten(@background-warning, 5);
+@background-hover-danger:  lighten(@background-danger, 5);
+
+// text-@{mood}: text color on normal background
+@text-primary: @color-primary;
+@text-success: @color-success;
+@text-info:    @color-info;
+@text-warning: @color-warning;
+@text-danger:  @color-danger;
+
+// text-hover-@{mood}: text color on normal background while being hovered
+@text-hover-primary: lighten(@color-primary, 5);
+@text-hover-success: lighten(@color-success, 5);
+@text-hover-info:    lighten(@color-info,    5);
+@text-hover-warning: lighten(@color-warning, 5);
+@text-hover-danger:  lighten(@color-danger,  5);
+
+// text-on-@{mood}: text color on colored background
+@text-on-primary: darken(@text-primary, 26);
+@text-on-success: darken(@text-success, 26);
+@text-on-info:    darken(@text-info, 26);
+@text-on-warning: darken(@text-warning, 26);
+@text-on-danger:  darken(@text-danger, 26);
+
+// text-hover-on-@{mood}: text color on colored background while being hovered
+@text-hover-on-primary: white;
+@text-hover-on-success: white;
+@text-hover-on-info:    white;
+@text-hover-on-warning: white;
+@text-hover-on-danger:  white;

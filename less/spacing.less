@@ -1,49 +1,21 @@
+.loop(length(@sizes));
 
-.no-margin {
-	margin: 0;
+.loop(@n, @i: 1) when (@i <= @n) {
+	.each(extract(@sizes, @i));
+	.loop(@n, @i + 1);
 }
 
-.no-padding {
-	padding: 0;
+.each(@size) {
+	@spacing: @@spacing-var; @spacing-var: 'spacing-@{size}';
+	.generate(margin, @size, @spacing);
+	.generate(padding, @size, @spacing);
 }
 
-.no-spacing {
-	margin: 0;
-	padding: 0;
+.generate(@type, @size, @spacing) {
+	.@{type}-@{size} { @{type}: @spacing; }
+	.@{type}-ver-@{size} { @{type}-top: @spacing; @{type}-bottom: @spacing; }
+	.@{type}-hor-@{size} { @{type}-left: @spacing; @{type}-right: @spacing; }
 }
 
-/* margin-sizes */
-
-.margin-xs { margin: @spacing-xs; }
-.margin-xs-ver { margin-top: @spacing-xs; margin-bottom: @spacing-xs; }
-.margin-xs-hor { margin-left: @spacing-xs; margin-right: @spacing-xs; }
-
-.margin-sm { margin: @spacing-sm; }
-.margin-sm-ver { margin-top: @spacing-sm; margin-bottom: @spacing-sm; }
-.margin-sm-hor { margin-left: @spacing-sm; margin-right: @spacing-sm; }
-
-.margin-md { margin: @spacing-md; }
-.margin-md-ver { margin-top: @spacing-md; margin-bottom: @spacing-md; }
-.margin-md-hor { margin-left: @spacing-md; margin-right: @spacing-md; }
-
-.margin-lg { margin: @spacing-lg; }
-.margin-lg-ver { margin-top: @spacing-lg; margin-bottom: @spacing-lg; }
-.margin-lg-hor { margin-left: @spacing-lg; margin-right: @spacing-lg; }
-
-/* padding sizes */
-
-.padding-xs { padding: @spacing-xs; }
-.padding-xs-ver { padding-top: @spacing-xs; padding-bottom: @spacing-xs; }
-.padding-xs-hor { padding-left: @spacing-xs; padding-right: @spacing-xs; }
-
-.padding-sm { padding: @spacing-sm; }
-.padding-sm-ver { padding-top: @spacing-sm; padding-bottom: @spacing-sm; }
-.padding-sm-hor { padding-left: @spacing-sm; padding-right: @spacing-sm; }
-
-.padding-md { padding: @spacing-md; }
-.padding-md-ver { padding-top: @spacing-md; padding-bottom: @spacing-md; }
-.padding-md-hor { padding-left: @spacing-md; padding-right: @spacing-md; }
-
-.padding-lg { padding: @spacing-lg; }
-.padding-lg-ver { padding-top: @spacing-lg; padding-bottom: @spacing-lg; }
-.padding-lg-hor { padding-left: @spacing-lg; padding-right: @spacing-lg; }
+.margin-none { margin: 0; }
+.padding-none { padding: 0; }

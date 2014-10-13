@@ -1,15 +1,12 @@
-.border-radius-xs {
-	border-radius: @border-radius-xs;
+.loop(length(@sizes));
+
+.loop(@n, @i: 1) when (@n <= @i) {
+	.each(extract(@sizes, @i));
+	.loop(@n, @i + 1);
 }
 
-.border-radius-sm {
-	border-radius: @border-radius-sm;
-}
-
-.border-radius-md {
-	border-radius: @border-radius-md;
-}
-
-.border-radius-lg {
-	border-radius: @border-radius-lg;
+.each(@size) {
+	.border-radius-@{size} {
+		border-radius: @@temp; @temp: 'border-radius-@{size}';
+	}
 }

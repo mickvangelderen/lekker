@@ -24,48 +24,30 @@
 	flex-wrap: wrap;
 }
 
-// gap sizes
-.set-xs {
-	margin: -@spacing-xs/2;
-	> li {
-		padding: @spacing-xs/2;
+// create set containers
+.set-loop(length(@sizes));
+.set-loop(@n, @i: 1) when (@i <= @n) {
+	.set-each(extract(@sizes, @i));
+	.set-loop(@n, @i + 1);
+}
+.set-each(@size) {
+	@spacing: @@temp; @temp: 'spacing-@{size}';
+	.set-@{size} {
+		margin: -@spacing/2;
+		> li {
+			padding: @spacing/2;
+		}
 	}
 }
 
-.set-sm {
-	margin: -@spacing-sm/2;
-	> li {
-		padding: @spacing-sm/2;
-	}
+// create set elements
+.grid-loop(@grid-size);
+.grid-loop(@n, @i: 1, @all: ~'.col-1') when (@i <= @n) {
+	.grid-each(@i, @n);
+	@{all} when (@i = @n) { min-height: 1px; }
+	@next-i: @i + 1;
+	.grid-loop(@n, @next-i, ~'@{all}, .col-@{next-i}');
 }
-
-.set-md {
-	margin: -@spacing-md/2;
-	> li {
-		padding: @spacing-md/2;
-	}
+.grid-each(@size, @n) {
+	.col-@{size} { width: percentage(@size/@n); }
 }
-
-.set-lg {
-	margin: -@spacing-lg/2;
-	> li {
-		padding: @spacing-lg/2;
-	}
-}
-
-.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
-	min-height: 1px;
-}
-
-.col-1 { width: percentage(1/12); }
-.col-2 { width: percentage(2/12); }
-.col-3 { width: percentage(3/12); }
-.col-4 { width: percentage(4/12); }
-.col-5 { width: percentage(5/12); }
-.col-6 { width: percentage(6/12); }
-.col-7 { width: percentage(7/12); }
-.col-8 { width: percentage(8/12); }
-.col-9 { width: percentage(9/12); }
-.col-10 { width: percentage(10/12); }
-.col-11 { width: percentage(11/12); }
-.col-12 { width: percentage(12/12); }

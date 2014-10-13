@@ -1,13 +1,18 @@
-
 .container {
 	margin: 0 auto;
-	@media (min-width: @screen-sm-min) {
-		width: @container-sm;
+
+	.loop(length(@sizes));
+
+	.loop(@n, @i: 2) when (@i <= @n) {
+		.each(extract(@sizes, @i));
+		.loop(@n, @i + 1);
 	}
-	@media (min-width: @screen-md-min) {
-		width: @container-md;
-	}
-	@media (min-width: @screen-lg-min) {
-		width: @container-lg;
+
+	.each(@size) {
+		@min-width-var: 'screen-min-@{size}';
+		@width-var: 'container-width-@{size}';
+		@media (min-width: @@min-width-var) {
+			width: @@width-var;
+		}
 	}
 }

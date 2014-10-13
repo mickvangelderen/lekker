@@ -1,26 +1,22 @@
-/* normalize */
-@import "burrowed/normalize";
+@import "variables/sizes";
+@import "variables/moods";
 
-/* variables */
-@import "variables";
+// mixins
+@import "mixins/border-radius";
+@import "mixins/clearfix";
+@import "mixins/size";
 
-/* mixins */
-@import "burrowed/border-radius";
-@import "burrowed/clearfix";
-@import "burrowed/size";
-
-/* positioning components */
-@import "container";
-@import "set";
-@import "flex";
-@import "inline";
-@import "block";
-@import "spacing";
-
-/* coloring components */
-@import "background";
-@import "text";
-@import "border-radius";
+// components scoped so they don't export anything
+& when (true) { @import "align"; }
+& when (true) { @import "block"; }
+& when (true) { @import "border-radius"; }
+& when (true) { @import "container"; }
+& when (true) { @import "flex"; }
+& when (true) { @import "inline"; }
+& when (true) { @import "mood"; }
+& when (true) { @import "scrollbar"; }
+& when (true) { @import "set"; }
+& when (true) { @import "spacing"; }
 
 *,
 *:before,
@@ -30,13 +26,4 @@
 
 .overflow-hidden {
 	overflow: hidden;
-}
-
-.always-show-scrollbar-y {
-	overflow-y: scroll;
-}
-
-a {
-	text-decoration: none;
-	font-weight: bold;
 }

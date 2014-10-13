@@ -1,0 +1,37 @@
+.loop(length(@moods));
+
+// loop over all moods accumulating hover selectors in @all.
+.loop(@n, @i: 1, @all: replace(~'.background-X, .text-X, .mood-X', 'X', %('hover-%s:hover', extract(@moods, 1)) , 'g')) when (@i <= @n) {
+	.each(extract(@moods, @i));
+	@{all} when (@i = @n) { cursor: pointer; }
+	.loop(@n, @i + 1, replace(~'@{all}, .background-X, .text-X, .mood-X', 'X', %('hover-%s:hover', extract(@moods, @i + 1)), 'g'));
+}
+
+.each(@mood) {
+	// background, background-hover, mood and mood-hover share the same background color when not hovered
+	.background-@{mood}, .mood-@{mood}, .background-hover-@{mood}, .mood-hover-@{mood} {
+		background-color: @@temp; @temp: 'background-@{mood}';
+	}
+	// background-hover and mood-hover share a different background color when hovered
+	.background-hover-@{mood}, .mood-hover-@{mood}  {
+		&:hover { background-color: @@temp; @temp: 'background-hover-@{mood}'; }
+	}
+
+	// text and text-hover share the same text color when not hovered
+	.text-@{mood}, .text-hover-@{mood} {
+		color: @@temp; @temp: 'text-@{mood}';
+	}
+	// text-hover has a different color when hovered
+	.text-hover-@{mood} {
+		&:hover { color: @@temp; @temp: 'text-hover-@{mood}'; }
+	}
+
+	// mood and mood-hover share the same text color on background when not hovered
+	.mood-@{mood}, .mood-hover-@{mood} {
+		color: @@temp; @temp: 'text-on-@{mood}';
+	}
+	// mood hover has a different text color on background when hovered
+	.mood-hover-@{mood} {
+		&:hover { color: @@temp; @temp: 'text-hover-on-@{mood}'; }
+	}
+}
