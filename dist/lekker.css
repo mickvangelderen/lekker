@@ -10,6 +10,18 @@
 .block {
   display: block;
 }
+.border-radius-xs {
+  border-radius: 3px;
+}
+.border-radius-sm {
+  border-radius: 5px;
+}
+.border-radius-md {
+  border-radius: 7px;
+}
+.border-radius-lg {
+  border-radius: 15px;
+}
 .container {
   margin: 0 auto;
 }

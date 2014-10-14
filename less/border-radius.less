@@ -1,6 +1,6 @@
 .loop(length(@sizes));
 
-.loop(@n, @i: 1) when (@n <= @i) {
+.loop(@n, @i: 1) when (@i <= @n) {
 	.each(extract(@sizes, @i));
 	.loop(@n, @i + 1);
 }
