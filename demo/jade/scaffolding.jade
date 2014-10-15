@@ -1,0 +1,16 @@
+include mixins/javascript
+include mixins/css
+
+doctype html
+html
+	head
+		block head
+			+css('/modules/normalize.css/normalize')
+			+css('/modules/demo/demo')
+
+			+javascript('/modules/demo/demo')
+
+	body
+		main
+			block main
+				p Default Main

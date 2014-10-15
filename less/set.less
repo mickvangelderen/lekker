@@ -24,6 +24,29 @@
 	flex-wrap: wrap;
 }
 
+// "Removes" the negative margin from the set, doesn't work for sets based on floats
+.set-container-inline {
+	display: inline-block;
+	width: 100%;
+}
+
+// "Removes" the negative margin from the set but requires an additional div
+.set-container-float {
+	.clearfix();
+	> div {
+		float: left;
+		width: 100%;
+	}
+}
+
+// "Removes" the negative margin from the set
+.set-container-flex {
+	display: flex;
+	> .set {
+		flex-grow: 1;
+	}
+}
+
 // create set containers
 .set-loop(length(@sizes));
 .set-loop(@n, @i: 1) when (@i <= @n) {

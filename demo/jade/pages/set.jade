@@ -1,0 +1,344 @@
+extend ../scaffolding
+
+block append head
+	title Set Demo
+
+mixin items
+	li.col-6
+		div(style="border: 8px solid red;") .col-6
+	li.col-6
+		div(style="border: 8px solid red;") .col-6
+	li.col-8
+		div(style="border: 8px solid red;") .col-8
+	li.col-2
+		div(style="border: 8px solid red;") .col-2
+	li.col-2
+		div(style="border: 8px solid red;") .col-2
+
+mixin border
+	div(style="border: 8px solid black;")
+		block
+
+block main
+	.container
+		header
+			h1 Set Demo
+
+		article
+			header
+				h2#no-solution no solution
+
+			ul.set.set-inline.set-lg
+				li.col-4
+					.center <strong> inline </strong>
+					+border
+						ul.set.set-inline.set-lg(style="background: rgba(255, 180, 180, 0.7);")
+							+items
+					p.
+						Background overflows over the black border.
+				li.col-4
+					.center <strong> float </strong>
+					+border
+						ul.set.set-float.set-lg(style="background: rgba(255, 180, 180, 0.7);")
+							+items
+					p.
+						Background overflows over the black border.
+				li.col-4
+					.center <strong> flex </strong>
+					+border
+						ul.set.set-flex.set-lg(style="background: rgba(255, 180, 180, 0.7);")
+							+items
+					p.
+						Background overflows over the black border.
+
+		article
+			header
+				h2 Background technique summary
+
+			p.
+				Lets say we want to give our set a background but we do not want any padding around it. In
+				other words, the background must only cover the area in which the set items are put.
+			p.
+				The problem is that the .set class uses negative margins which cause the area of the ul element,
+				on which .set is supposed to be applied, to spill over the area we want to apply a background to.
+			p.
+				I've tried the following techniques and have yet to find a perfect solution:
+
+			table.margin-ver-lg.center
+				caption Background technique summary
+				thead
+					tr
+						th.padding-sm Name
+						th.padding-sm # wrappers
+						th.padding-sm inline
+						th.padding-sm float
+						th.padding-sm flex
+						th.padding-sm styling
+				tbody
+					tr
+						td.padding-sm <a href="#no-solution">no solution</a>
+						td.padding-sm 0
+						td.padding-sm background overflows
+						td.padding-sm background overflows
+						td.padding-sm background overflows
+						td.padding-sm
+							pre.left.
+								.set {
+								  // ... original properties
+								  background: rgba(255, 180, 180, 0.7);
+								}
+					tr
+						td.padding-sm <a href="#padding">padding</a>
+						td.padding-sm 1
+						td.padding-sm generates a padding
+						td.padding-sm generates a padding
+						td.padding-sm generates a padding
+						td.padding-sm
+							pre.left.
+								.wrapper {
+								  padding: 2px;
+								  background: rgba(255, 180, 180, 0.7);
+								}
+					tr
+						td.padding-sm <a href="#overflow-hidden">overflow hidden</a>
+						td.padding-sm 1
+						td.padding-sm ALL overflow is hidden
+						td.padding-sm ALL overflow is hidden
+						td.padding-sm ALL overflow is hidden
+						td.padding-sm
+							pre.left.
+								.wrapper {
+								  background: rgba(255, 180, 180, 0.7);
+								  overflow: hidden;
+								}
+					tr
+						td.padding-sm <a href="#inline-block-wrapper">inline-block wrapper</a>
+						td.padding-sm 1
+						td.padding-sm
+						td.padding-sm extra space below
+						td.padding-sm
+						td.padding-sm
+							pre.left.
+								.wrapper {
+								  background: rgba(255, 180, 180, 0.7);
+								  display: inline-block;
+								  width: 100%;
+								}
+					tr
+						td.padding-sm <a href="#float-wrappers">float wrappers</a>
+						td.padding-sm 2
+						td.padding-sm
+						td.padding-sm
+						td.padding-sm
+						td.padding-sm
+							pre.left.
+								.outer {
+								  background: rgba(255, 180, 180, 0.7);
+								}
+								// just clearfix
+								.outer:before, .outer:after {
+								  content: " ";  display: table;
+								}
+								.outer:after {
+								  clear: both;
+								}
+
+								.inner {
+								  float: left;
+								  width: 100%;
+								}
+					tr
+						td.padding-sm <a href="#flex-wrapper">flex wrapper</a>
+						td.padding-sm 1
+						td.padding-sm
+						td.padding-sm
+						td.padding-sm
+						td.padding-sm
+							pre.left.
+								.wrapper {
+								  display: flex;
+								}
+								.wrapper &gt; * {
+								  flex-grow: 1;
+								}
+
+
+
+		article
+			header
+				h2#padding padding
+
+			mixin wrapper
+				div(style="padding: 2px; background: rgba(255, 180, 180, 0.7);")
+					block
+
+			ul.set.set-inline.set-lg
+				li.col-4
+					.center <strong> inline </strong>
+					+border
+						+wrapper
+							ul.set.set-inline.set-lg
+								+items
+					p.
+						Now we have padding :(
+				li.col-4
+					.center <strong> float </strong>
+					+border
+						+wrapper
+							ul.set.set-float.set-lg
+								+items
+					p.
+						Now we have padding :(
+				li.col-4
+					.center <strong> flex </strong>
+					+border
+						+wrapper
+							ul.set.set-flex.set-lg
+								+items
+					p.
+						Now we have padding :(
+
+
+		article
+			header
+				h2#overflow-hidden overflow hidden
+
+			mixin wrapper
+				div(style="overflow: hidden; background: rgba(255, 180, 180, 0.7);")
+					block
+
+			ul.set.set-inline.set-lg
+				li.col-4
+					.center <strong> inline </strong>
+					+border
+						+wrapper
+							ul.set.set-inline.set-lg
+								+items
+					p.
+						All overflow is hidden, including elements that are intended to extend beyond the set surface.
+				li.col-4
+					.center <strong> float </strong>
+					+border
+						+wrapper
+							ul.set.set-float.set-lg
+								+items
+					p.
+						All overflow is hidden, including elements that are intended to extend beyond the set surface.
+				li.col-4
+					.center <strong> flex </strong>
+					+border
+						+wrapper
+							ul.set.set-flex.set-lg
+								+items
+					p.
+						All overflow is hidden, including elements that are intended to extend beyond the set surface.
+
+
+		article
+			header
+				h2#inline-block-wrapper inline-block wrapper
+
+			mixin wrapper
+				div(style="display: inline-block; width: 100%; background: rgba(255, 180, 180, 0.7);")
+					block
+
+			ul.set.set-inline.set-lg
+				li.col-4
+					.center <strong> inline </strong>
+					+border
+						+wrapper
+							ul.set.set-inline.set-lg
+								+items
+					p.
+						Looks fine.
+				li.col-4
+					.center <strong> float </strong>
+					+border
+						+wrapper
+							ul.set.set-float.set-lg
+								+items
+					p.
+						The float somehow adds some space after the last row on Chrome 38.
+				li.col-4
+					.center <strong> flex </strong>
+					+border
+						+wrapper
+							ul.set.set-flex.set-lg
+								+items
+					p.
+						Looks fine.
+
+		article
+			header
+				h2#float-wrappers float-wrappers
+
+			mixin outer-wrapper
+				div.clearfix(style="background: rgba(255, 180, 180, 0.7);")
+					block
+
+			mixin inner-wrapper
+				div(style="float: left; width: 100%")
+					block
+
+			ul.set.set-inline.set-lg
+				li.col-4
+					.center <strong> inline </strong>
+					+border
+						+outer-wrapper
+							+inner-wrapper
+								ul.set.set-inline.set-lg
+									+items
+					p.
+						Looks fine.
+				li.col-4
+					.center <strong> float </strong>
+					+border
+						+outer-wrapper
+							+inner-wrapper
+								ul.set.set-float.set-lg
+									+items
+					p.
+						Looks fine.
+				li.col-4
+					.center <strong> flex </strong>
+					+border
+						+outer-wrapper
+							+inner-wrapper
+								ul.set.set-flex.set-lg
+									+items
+					p.
+						Looks fine.
+
+		article
+			header
+				h2#flex-wrapper flex wrapper
+
+			mixin wrapper
+				div(style="display: flex; background: rgba(255, 180, 180, 0.7);")
+					block
+
+			ul.set.set-inline.set-lg
+				li.col-4
+					.center <strong> inline </strong>
+					+border
+						+wrapper
+							ul.set.set-inline.set-lg(style="flex-grow: 1;")
+								+items
+					p.
+						Requires flex-grow on ul
+				li.col-4
+					.center <strong> float </strong>
+					+border
+						+wrapper
+							ul.set.set-float.set-lg(style="flex-grow: 1;")
+								+items
+					p.
+						Requires flex-grow on ul
+				li.col-4
+					.center <strong> flex </strong>
+					+border
+						+wrapper
+							ul.set.set-flex.set-lg(style="flex-grow: 1;")
+								+items
+					p.
+						Requires flex-grow on ul

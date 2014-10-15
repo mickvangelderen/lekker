@@ -21,7 +21,10 @@
   },
   "homepage": "https://github.com/mickvangelderen/lekker",
   "devDependencies": {
+    "express": "^4.9.7",
     "grunt": "^0.4.5",
-    "grunt-contrib-less": "^0.11.4"
+    "grunt-contrib-less": "^0.11.4",
+    "jade": "^1.7.0",
+    "less-middleware": "^1.0.4"
   }
 }

@@ -143,6 +143,18 @@
 .inline-baseline {
   vertical-align: baseline;
 }
+img {
+  max-width: 100%;
+  height: auto;
+}
+.image-stretch {
+  width: 100%;
+  height: auto;
+}
+.image-stretch-ver {
+  width: auto;
+  height: 100%;
+}
 .background-primary,
 .mood-primary,
 .background-hover-primary,
@@ -299,6 +311,28 @@
 .set-flex {
   display: flex;
   flex-wrap: wrap;
+}
+.set-container-inline {
+  display: inline-block;
+  width: 100%;
+}
+.set-container-float:before,
+.set-container-float:after {
+  content: " ";
+  display: table;
+}
+.set-container-float:after {
+  clear: both;
+}
+.set-container-float > div {
+  float: left;
+  width: 100%;
+}
+.set-container-flex {
+  display: flex;
+}
+.set-container-flex > .set {
+  flex-grow: 1;
 }
 .set-xs {
   margin: -2px;
